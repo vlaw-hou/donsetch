@@ -72,6 +72,7 @@ WORKDIR /build
 # and emits the linux_like cfg)
 COPY Cargo.toml Cargo.lock README.md LICENSE ./
 COPY build.rs ./
+COPY core/ ./core/
 COPY src/ ./src/
 COPY tests/ ./tests/
 
