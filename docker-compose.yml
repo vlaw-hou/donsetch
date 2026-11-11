@@ -16,46 +16,6 @@
 #   MCP clients connect to: http://localhost:8765/mcp
 
 services:
-  donsetch:
-    build:
-      context: .
-      # Uncomment to include Chrome for web_screenshot:
-      # args:
-      #   INSTALL_CHROME: "true"
-    image: donsetch-mcp:latest
-    container_name: donsetch
-
-    environment:
-      # ── Fetch/search tuning ─────────────────────────────────────
-      # Optional: disable disk persistence for self-improving fetch state
-      # DONSEEK_NO_DISK_STATE: "1"
-
-      # Optional: search proxy rotation (comma-separated)
-      # DONSEEK_PROXIES: "http://proxy1:8080,socks5://proxy2:1080"
-
-      NO_COLOR: "1"
-
-    # Time `docker compose stop` allows between SIGTERM and SIGKILL.
-    stop_grace_period: 45s
-
-    # Reap zombie processes (PID 1 init).
-    init: true
-
-    volumes:
-      # Persist the fetch/search cache and stored login sessions across runs
-      - donsetch-cache:/home/donsetch/.cache/donsetch
-
-    # DNS settings to avoid ad-blocking interference if needed
-    # dns:
-    #   - 1.1.1.1
-    #   - 9.9.9.9
-
-    # Memory ceiling: OCR + semantic reranking peak around 1-2GB
-    # under heavy crawls. Adjust to taste; 2g is a comfortable ceiling.
-    deploy:
-      resources:
-        limits:
-          memory: 2g
 
   # ── HTTP transport (opt-in profile) ─────────────────────────────
   # docker compose --profile http up -d donsetch-http
